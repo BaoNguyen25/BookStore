@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-------- title ----------->
+    <title>Cửa hàng bán sách</title>
+
+    <!-------- customer style link ----------->
+    <link rel="stylesheet" href="/css/cart.css" />
+
+
+    <!-------- font awesome cdn link --------->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
+
+    <!------- swipper cdn link ------------>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+
+
+</head>
+
+<body>
+    
+
+    <!--------- header section start ------------>
+    <header class="header">
+
+        <div class="header-1">
+
+            <a href="" class="logo"><i class="fas fa-book"> SÁCH </i></a>
+
+            <form action="" class="search-form">
+                <input type="search" name="" placeholder="search here..." id="search-box">
+                <label for="search-box" class="fas fa-search"></label>
+            </form>
+
+            <div class="icons">
+                <div id="search-btn" class="fas fa-search"></div>
+                <a href="" class="fas fa-heart"></a>
+                <a href="" class="fas fa-shopping-cart"></a>
+                <div id="login-btn" class="fas fa-user"></div>
+            </div>
+
+        </div>
+
+        <div class="header-2">
+
+            <div class="navbar">
+                <a href="/views/dashboard.ejs">Trang chủ</a>
+                <a href="#featured">Sách nổi bật</a>
+                <a href="#arrivals">Sách mới</a>
+                <a href="#reviews">Comment</a>
+                <a href="#blogs">Blog</a>
+            </div>
+
+        </div>
+
+
+
+    </header>
+
+    <!--------- header section ends ------------>
+
+    <!--------- bottom navbar  ------------>
+
+    <div class="bottom-navbar">
+        <a href="#home" class="fas fa-home"></a>
+        <a href="#featured" class="fas fa-list"></a>
+        <a href="#arrivals" class="fas fa-tags"></a>
+        <a href="#reviews" class="fas fa-comments"></a>
+        <a href="#blogs" class="fas fa-app-store"></a>
+    </div>
+
+
+    <!-------- bottom navbar start ----------->
+
+    <div class="bottom-navbar">
+        <a href="#home" class="fas fa-home"></a>
+        <a href="#featured" class="fas fa-list"></a>
+        <a href="#arrivals" class="fas fa-tags"></a>
+        <a href="#reviews" class="fas fa-comments"></a>
+        <a href="#blogs" class="fas fa-app-store"></a>
+    </div>
+
+
+    <!-------- bottom navbar ends ----------->
+
+     <!-------- login form start ----------->
+
+   
+     <div class="login-form-container">
+
+        <div id="close-login-btn" class="fas fa-times"></div>
+
+        <form action="">
+            <h3>Đăng nhập</h3>
+            <span>Email</span>
+            <input type="email" name="" class="box"  placeholder="enter your email">
+            <span>Mật khẩu</span>
+            <input type="password" name="" class="box"  placeholder="enter your password">
+
+            <div class="check-box">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Ghi nhớ tôi</label>
+            </div>
+            <input type="submit" value="sign in" class="btn">
+            <p>Quên mật khẩu<a href="">Ấn đây</a></p>
+            <p>Chưa có tài khoản?<a href="">Đăng ký tại đây</a></p>
+        </form>
+    </div>
+
+     <!-------- login form ends ----------->
+
+   
+
+  <!--================Cart Area =================-->
+  <div class="wrapper">
+    <h1>Shopping Cart</h1>
+    <div class="project">
+        <div class="shop">
+            <div class="box">
+                <img src="images/book-1.png">
+                <div class="content">
+                    <h3>Women Lipsticks</h3>
+                    <h4>Price: $40</h4>
+                    <p class="unit">Quantity: <input name="" value="2"></p>
+                    <p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Remove</span></p>
+                </div>
+            </div>
+            <div class="box">
+                <img src="images/book-1.png">
+                <div class="content">
+                    <h3>Man's Watches</h3>
+                    <h4>Price: $40</h4>
+                    <p class="unit">Quantity: <input name="" value="1"></p>
+                    <p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Remove</span></p>
+                </div>
+            </div>
+            <div class="box">
+                <img src="images/book-1.png">
+                <div class="content">
+                    <h3>Samsung Mobile</h3>
+                    <h4>Price: $250</h4>
+                    <p class="unit">Quantity: <input name="" value="0"></p>
+                    <p class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Remove</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="right-bar">
+            <p><span>Subtotal</span> <span>$120</span></p>
+            <hr>
+            <p><span>Tax (5%)</span> <span>$6</span></p>
+            <hr>
+            <p><span>Shipping</span> <span>$15</span></p>
+            <hr>
+            <p><span>Total</span> <span>$141</span></p><a href="#"><i class="fa fa-shopping-cart"></i>Checkout</a>
+        </div>
+    </div>
+</div>
+<!--================End Cart Area =================-->
+  
+
+
+
+
+        <!-------- deal section start  ----------->
+
+       
+
+
+      
+
+
+
+         
+
+
+
+
+
+
+
+      <!---- swiper cdn link ---------->
+      <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+     
+
+     <!------- customer script link --------->
+
+     <script src="/scripts/cart.js"></script>
+    
+</body>
+</html>

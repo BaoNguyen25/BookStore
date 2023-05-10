@@ -22,6 +22,10 @@ class RenderController {
         res.render('book');
     }
 
+    getCart = (req, res) => {
+        res.render('cart');
+    }
+
 
 
 }
