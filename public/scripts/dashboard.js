@@ -1,13 +1,10 @@
 /*------- search button ----------- */
 
-searchform = document.querySelector('.search-form');
+let searchform = document.querySelector('.search-form');
 
 document.querySelector('#search-btn').onclick = () =>{
     searchform.classList.toggle('active');
 }
-
-
-
 
 window.onscroll = () =>{
 
