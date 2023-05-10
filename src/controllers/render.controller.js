@@ -2,7 +2,7 @@
 
 class RenderController {
     getSignIn = (req, res) => {
-        res.render('signIn');r
+        res.render('signIn');
     }
 
     getForgetPassword = (req, res) => {
@@ -28,6 +28,14 @@ class RenderController {
 
 
 
+
+    getBookPage = (req, res) => {
+        res.render('book');
+    }
+
+    getDashboard = (req, res) => {
+        res.render('dashboard');
+    }
 }
 
 module.exports = new RenderController();

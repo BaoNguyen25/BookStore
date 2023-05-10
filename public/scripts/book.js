@@ -1,13 +1,10 @@
-/*------- search button ----------- */
+import Swiper from '/scripts/swiper/swiper-bundle.esm.browser.min.js';
 
-searchform = document.querySelector('.search-form');
+let searchform = document.querySelector('.search-form');
 
 document.querySelector('#search-btn').onclick = () =>{
     searchform.classList.toggle('active');
 }
-
-
-
 
 window.onscroll = () =>{
 
