@@ -171,3 +171,45 @@ var swiper = new Swiper(".featured-slider", {
       },
     },
   });
+
+//////////////////////thanh keo
+const sliderContainer = document.querySelector('.slider-container');
+const sliderRange = document.querySelector('.slider-range');
+const sliderHandle = document.querySelector('.slider-handle');
+const sliderValue = document.createElement('div');
+sliderValue.className = 'slider-value';
+sliderValue.textContent = '50'; // Giá trị mặc định
+sliderContainer.appendChild(sliderValue);
+
+sliderHandle.addEventListener('mousedown', startDragging);
+sliderHandle.addEventListener('touchstart', startDragging);
+
+function startDragging(event) {
+  event.preventDefault();
+  document.addEventListener('mousemove', updateValue);
+  document.addEventListener('touchmove', updateValue);
+  document.addEventListener('mouseup', stopDragging);
+  document.addEventListener('touchend', stopDragging);
+}
+
+function updateValue(event) {
+  const containerWidth = sliderContainer.offsetWidth;
+  const handleWidth = sliderHandle.offsetWidth;
+  const positionX = event.pageX || event.touches[0].pageX;
+  const offsetX = Math.max(0, Math.min(positionX - sliderContainer.offsetLeft, containerWidth - handleWidth));
+  const percentage = (offsetX / (containerWidth - handleWidth)) * 100;
+  const value = Math.round(percentage);
+  
+  sliderRange.style.width = `${percentage}%`;
+  sliderHandle.style.left = `${percentage}%`;
+  sliderValue.style.left = `${percentage}%`;
+  sliderValue.textContent = value.toString();
+}
+
+function stopDragging() {
+  document.removeEventListener('mousemove', updateValue);
+  document.removeEventListener('touchmove', updateValue);
+  document.removeEventListener('mouseup', stopDragging);
+  document.removeEventListener('touchend', stopDragging);
+}
+

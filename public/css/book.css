@@ -62,7 +62,14 @@ html::-webkit-scrollbar-thumb{
 
 }
 
-.header .header-1 .search-form{
+.header .header-2 {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+     /* Đảm bảo thanh tìm kiếm chiếm toàn bộ chiều cao của màn hình */
+}
+
+.header .header-2 .search-form {
     width: 50rem;
     height: 5rem;
     border: var(--border);
@@ -71,9 +78,10 @@ html::-webkit-scrollbar-thumb{
     display: flex;
     align-items: center;
     border-radius: 0.5rem;
+    margin-bottom: 20px; /* Thêm khoảng cách dưới thanh tìm kiếm */
 }
 
-.header .header-1 .search-form input{
+.header .header-2 .search-form input {
     font-size: 1.6rem;
     padding: 0 1.2rem;
     height: 100%;
@@ -82,16 +90,17 @@ html::-webkit-scrollbar-thumb{
     color: var(--black);
 }
 
-.header .header-1 .search-form label{
+.header .header-2 .search-form label {
     font-size: 2.5rem;
     padding-right: 1.5rem;
     color: var(--black);
     cursor: pointer;
 }
 
-.header .header-1 .search-form label:hover{
+.header .header-2 .search-form label:hover {
     color: #009d63;
 }
+
 
 .header .header-1 .icons div,
 .header .header-1 .icons a{
@@ -112,25 +121,25 @@ html::-webkit-scrollbar-thumb{
 
 /*------ navigation bar------*/
 .header .header-2{
-    background-color: #009d63;
+    background-color: #ffff;
 }
 
-.header .header-2 .navbar{
+.header .header-1 .navbar{
     text-align: center;
 }
 
-.header .header-2 .navbar a{
-    color: #fff;
+.header .header-1 .navbar a{
+    color: #009d63;    
     display: inline-block;
     padding: 1.2rem;
     font-size: 1.7rem;
 }
 
-.header .header-2 .navbar a:hover{
+.header .header-1 .navbar a:hover{
     background: var(--dark-color);
 }
 
-.header .header-2.active{
+.header .header-1.active{
     position: fixed;
     top: 0;
     left: 0;
@@ -816,69 +825,68 @@ section{
 
 
 
-
-
-label {
-  font-weight: bold;
-  display: block;
-  text-align: center;
-}
-
-select, button {
-  margin-top: 10px;
-  padding: 8px 12px;
-  font-size: 14px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  color: #333;
-  display: block;
-  margin: 0 auto;
-}
-
-button {
-  background-color: #4CAF50;
-  color: #fff;
-  cursor: pointer;
-}
-
-#bookList {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  
-}
-
-.book-item {
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ccc;
- 
-  text-align: center;
-}
-
-.book-item h3 {
-  margin: 0;
-  color: #333;
-  font-size: 18px;
-}
-
-.book-item p {
-  margin: 5px 0;
-  color: #666;
-}
-
-.book-item p:first-child {
-  font-weight: bold;
-}
-.filter-container {
+.navbar-b{
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: right;
+}
+
+ select {
+        background-color: #009d63;
+        color: white;
+        border: none;
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    
+    option {
+        background-color: #009d63;
+        color: white;
+    }
+
+.dropdown{
+    width: 130px;
+    text-align: center;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.slider-container {
+    margin-top: 30px;
+    width: 300px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 10px;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
   }
   
-  .filter-item {
-    flex-grow: 1;
-   
+  .slider-range {
+    height: 100%;
+    background-color: #009d63; /* Màu sắc của slider */
+    border-radius: 20px;
   }
   
+  .slider-handle {
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 2;
+  }
+  .search-form input {
+    padding-right: 40px; /* Để tạo không gian cho slider */
+  }
+  .search-form .slider-container {
+    position: absolute;
+    top: calc(100% + 5px); /* Đặt khoảng cách dưới thanh tìm kiếm */
+    left: 50%;
+    transform: translateX(-50%);
+  }

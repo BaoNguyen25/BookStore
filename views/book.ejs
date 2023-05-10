@@ -31,14 +31,15 @@
         <div class="header-1">
 
             <a href="" class="logo"><i class="fas fa-book"> SÁCH </i></a>
-
-            <form action="" class="search-form">
-                <input type="search" name="" placeholder="search here..." id="search-box">
-                <label for="search-box" class="fas fa-search"></label>
-            </form>
+        
+            <div class="navbar">
+                <a href="/views/dashboard.ejs">Trang chủ</a>
+                <a href="#featured">Sách</a>
+               
+            </div>
 
             <div class="icons">
-                <div id="search-btn" class="fas fa-search"></div>
+                
                 <a href="" class="fas fa-heart"></a>
                 <a href="" class="fas fa-shopping-cart"></a>
                 <div id="login-btn" class="fas fa-user"></div>
@@ -47,49 +48,43 @@
         </div>
 
         <div class="header-2">
-
-            <div class="navbar">
-                <a href="/views/dashboard.ejs">Trang chủ</a>
-                <a href="#featured">Sách nổi bật</a>
-                <a href="#arrivals">Sách mới</a>
-                <a href="#reviews">Comment</a>
-                <a href="#blogs">Blog</a>
+            <div class="navbar-b">
+                <div class="dropdown">
+                    <select name="">
+                        <option value="1">Thể Loại</option>
+                        <option value="2">New</option>
+                        <option value="3">Imported</option>
+                        <option value="4">Local</option>
+                    </select>
+                </div>
+                <div class="dropdown">
+                    <select name="">
+                        <option value="1">Tác Giả</option>
+                        <option value="2">New</option>
+                        <option value="3">Imported</option>
+                        <option value="4">Local</option>
+                    </select>
+                </div>
+               
+                <form action="" class="search-form">
+                    <input type="search" name="" placeholder="search here..." id="search-box">
+                    <label for="search-box" class="fas fa-search"></label>
+                    <div id="search-btn" class="fas fa-search"></div>
+                </form>
+             
             </div>
-
+           
+            
+              
+            
+        </div>
+        <div class="slider-container">
+            <div class="slider-range"></div>
+            <div class="slider-handle"></div>
         </div>
 
-         <!-----------Thanh tìm kiếm bắt đầu------ ------>
-         <div class="filter-container">
-            <div class="filter-item">
-              <label for="author">Tác giả:</label>
-              <select id="author">
-                <option value="">Tất cả</option>
-                <option value="author1">Tác giả 1</option>
-                <option value="author2">Tác giả 2</option>
-                <!-- Thêm các tác giả khác -->
-              </select>
-            </div>
-          
-            <div class="filter-item">
-              <label for="genre">Thể loại:</label>
-              <select id="genre">
-                <option value="">Tất cả</option>
-                <option value="genre1">Thể loại 1</option>
-                <option value="genre2">Thể loại 2</option>
-                <!-- Thêm các thể loại khác -->
-              </select>
-            </div>
-          
-            <div class="filter-item">
-              <button onclick="sortBooks()">Sắp xếp</button>
-            </div>
-          </div>
-          
-          <div id="bookList">
-            <!-- Danh sách sách sẽ được hiển thị ở đây -->
-          </div>
-          
-          
+        
+        
     <!-----------Thanh tìm kiếm  kết thúc------ ------>
 
     </header>
@@ -98,24 +93,11 @@
 
     <!--------- bottom navbar  ------------>
 
-    <div class="bottom-navbar">
-        <a href="#home" class="fas fa-home"></a>
-        <a href="#featured" class="fas fa-list"></a>
-        <a href="#arrivals" class="fas fa-tags"></a>
-        <a href="#reviews" class="fas fa-comments"></a>
-        <a href="#blogs" class="fas fa-app-store"></a>
-    </div>
+
 
 
     <!-------- bottom navbar start ----------->
 
-    <div class="bottom-navbar">
-        <a href="#home" class="fas fa-home"></a>
-        <a href="#featured" class="fas fa-list"></a>
-        <a href="#arrivals" class="fas fa-tags"></a>
-        <a href="#reviews" class="fas fa-comments"></a>
-        <a href="#blogs" class="fas fa-app-store"></a>
-    </div>
 
 
     <!-------- bottom navbar ends ----------->
@@ -157,7 +139,6 @@
 
     <section class="featured" id="featured">
 
-        <div class="heading"><span>Sách nổi bật</span></div>
 
         <div class="swiper featured-slider">
             <div class="swiper-wrapper">
