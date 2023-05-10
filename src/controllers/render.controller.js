@@ -14,6 +14,21 @@ class RenderController {
         res.render('recoverPassword', { userId });
     }
 
+    getDashboard = (req, res) => {
+        res.render('dashboard');
+    }
+
+    getBook = (req, res) => {
+        res.render('book');
+    }
+
+    getCart = (req, res) => {
+        res.render('cart');
+    }
+
+
+
+
     getBookPage = (req, res) => {
         res.render('book');
     }

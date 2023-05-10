@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,500;0,600;1,400;1,600&display=swap');
 
 :root{
-    --orange:#009d63;
+    --green:#009d63;
     --dark-color:#009d63;
     --black:#444;
     --light-color:#666;
@@ -14,7 +14,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
     box-sizing: border-box;
     outline: none;
     border: none;
@@ -812,3 +812,73 @@ section{
 .footer .credit span{
     color: #009d63;
 }
+
+
+
+
+
+
+label {
+  font-weight: bold;
+  display: block;
+  text-align: center;
+}
+
+select, button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  display: block;
+  margin: 0 auto;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #fff;
+  cursor: pointer;
+}
+
+#bookList {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.book-item {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+ 
+  text-align: center;
+}
+
+.book-item h3 {
+  margin: 0;
+  color: #333;
+  font-size: 18px;
+}
+
+.book-item p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.book-item p:first-child {
+  font-weight: bold;
+}
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+  }
+  
+  .filter-item {
+    flex-grow: 1;
+   
+  }
+  

@@ -18,4 +18,5 @@ router.get('/reset-password/:id', getRecoverPassword);
 
 router.post('/reset-password/:id', recoverPassword);
 
+
 module.exports = router;
