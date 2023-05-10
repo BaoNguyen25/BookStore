@@ -2,7 +2,7 @@
 
 class RenderController {
     getSignIn = (req, res) => {
-        res.render('signIn');r
+        res.render('signIn');
     }
 
     getForgetPassword = (req, res) => {
@@ -12,6 +12,14 @@ class RenderController {
     getRecoverPassword = (req, res) => {
         const userId = req.params.id;
         res.render('recoverPassword', { userId });
+    }
+
+    getBookPage = (req, res) => {
+        res.render('book');
+    }
+
+    getDashboard = (req, res) => {
+        res.render('dashboard');
     }
 }
 
