@@ -13,6 +13,17 @@ class RenderController {
         const userId = req.params.id;
         res.render('recoverPassword', { userId });
     }
+
+    getDashboard = (req, res) => {
+        res.render('dashboard');
+    }
+
+    getBook = (req, res) => {
+        res.render('book');
+    }
+
+
+
 }
 
 module.exports = new RenderController();
