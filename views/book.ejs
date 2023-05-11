@@ -1,624 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="img-src 'self' https://firebasestorage.googleapis.com">
 
-    <!-------- title ----------->
     <title>Cửa hàng bán sách</title>
-
-    <!-------- customer style link ----------->
     <link rel="stylesheet" href="/css/book.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
 
+  <body style="background-color: #f3f3f3">
+    <%- include('partials/header') %>
 
-    <!-------- font awesome cdn link --------->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <br />
 
+    <form class="form-wrapper" action="/dashboard/book" method="get">
+      <h1>Tìm kiếm sách</h1>
+      <div class="text-wrapper">
+        <input type="text" class="text-wrapper_input" name="name" id="name" />
+      </div>
+      <div class="select-wrapper">
+        <h4>Thể loại:</h4>
+        <select class="select-wrapper_select" name="category" id="category">
+          <option value="">Chọn thể loại</option>
+          <% for (let i = 0; i < categoryList.length; i++) { %>
+            <option value="<%= categoryList[i].name %>"><%= categoryList[i].name %></option>
+          <% } %>
+        </select>
+        <h4>Tác giả:</h4>
+        <select class="select-wrapper_select" name="author" id="author">
+          <option value="">Chọn tác giả</option>
+          <% for (let i = 0; i < authorList.length; i++) { %>
+            <option value="<%= authorList[i].name %>"><%= authorList[i].name %></option>
+          <% } %>
+        </select>
+      </div>
 
-    <!------- swipper cdn link ------------>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+      <div class="input-range-wrapper">
+        <h4>Giá tiền:</h4>
+        <input
+          class="input_range"
+          id="input_range"
+          name="input_range"
+          min="0"
+          max="1e6"
+          step="1e4"
+          type="range"
+        />
+        <div id="input_value" name="input_value">500000</div>
+      </div>
 
+      <div style="display: flex; justify-content: center;">
+        <input type="submit" value="Tìm kiếm"/>
+      </div>
+    </form>
 
-</head>
+    <br />
 
-<body>
-    <!--------- header section start ------------>
-    <header class="header">
-
-        <div class="header-1">
-
-            <a href="" class="logo"><i class="fas fa-book"> SÁCH </i></a>
-        
-            <div class="navbar">
-                <a href="/views/dashboard.ejs">Trang chủ</a>
-                <a href="#featured">Sách</a>
-               
+    <div class="shop-container">
+      <div class="shop">
+        <% for (let i = 0; i < bookList.length; i++) { %>
+          <div class="box-element">
+            <img src="<%= bookList[i].image.replaceAll(' ', '') %>" alt="Hình ảnh sách" />
+            <div class="content">
+              <h3><%= bookList[i].name %></h3>
+              <h4>Thể loại: <%= bookList[i].category %></h4>
+              <h4>Tác giả: <%= bookList[i].author %></h4>
+              <h4>Giá: <%= bookList[i].price %></h4>
+    
+              <button value="/order/detail/<%= bookList[i].name %>" id="submit-btn-<%= i %>">Thêm vào giỏ hàng</button>
             </div>
-
-            <div class="icons">
-                
-                <a href="" class="fas fa-heart"></a>
-                <a href="" class="fas fa-shopping-cart"></a>
-                <div id="login-btn" class="fas fa-user"></div>
-            </div>
-
-        </div>
-
-        <div class="header-2">
-            <div class="navbar-b">
-                <div class="dropdown">
-                    <select name="">
-                        <option value="1">Thể Loại</option>
-                        <option value="2">New</option>
-                        <option value="3">Imported</option>
-                        <option value="4">Local</option>
-                    </select>
-                </div>
-                <div class="dropdown">
-                    <select name="">
-                        <option value="1">Tác Giả</option>
-                        <option value="2">New</option>
-                        <option value="3">Imported</option>
-                        <option value="4">Local</option>
-                    </select>
-                </div>
-               
-                <form action="" class="search-form">
-                    <input type="search" name="" placeholder="search here..." id="search-box">
-                    <label for="search-box" class="fas fa-search"></label>
-                    <div id="search-btn" class="fas fa-search"></div>
-                </form>
-             
-            </div>
-           
-            
-              
-            
-        </div>
-        <div class="slider-container">
-            <div class="slider-range"></div>
-            <div class="slider-handle"></div>
-        </div>
-
-        
-        
-    <!-----------Thanh tìm kiếm  kết thúc------ ------>
-
-    </header>
-
-    <!--------- header section ends ------------>
-
-    <!--------- bottom navbar  ------------>
-
-
-
-
-    <!-------- bottom navbar start ----------->
-
-
-
-    <!-------- bottom navbar ends ----------->
-
-     <!-------- login form start ----------->
-
-   
-     <div class="login-form-container">
-
-        <div id="close-login-btn" class="fas fa-times"></div>
-
-        <form action="">
-            <h3>Đăng nhập</h3>
-            <span>Email</span>
-            <input type="email" name="" class="box"  placeholder="enter your email">
-            <span>Mật khẩu</span>
-            <input type="password" name="" class="box"  placeholder="enter your password">
-
-            <div class="check-box">
-                <input type="checkbox" id="remember-me">
-                <label for="remember-me">Ghi nhớ tôi</label>
-            </div>
-            <input type="submit" value="sign in" class="btn">
-            <p>Quên mật khẩu<a href="">Ấn đây</a></p>
-            <p>Chưa có tài khoản?<a href="">Đăng ký tại đây</a></p>
-        </form>
+          </div>
+        <% } %>
+      </div>
     </div>
 
-     <!-------- login form ends ----------->
+    <%- include('partials/footer.ejs') %>
 
-
-
-
- 
-
- 
-
-    <!-------- featured section start  ----------->
-
-    <section class="featured" id="featured">
-
-
-        <div class="swiper featured-slider">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="" class="fas fa-search"></a>
-                        <a href="" class="fas fa-heart"></a>
-                        <a href="" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" /images/book-1.png" alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>Sách nổi bật</h3>
-                        <div class="price">15.99 USD<span>20.99 USD</span></div>
-                        <a href="" class="btn">Thêm vào giỏ</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="" class="fas fa-search"></a>
-                        <a href="" class="fas fa-heart"></a>
-                        <a href="" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" /images/book-2.png" alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>Sách nổi bật</h3>
-                        <div class="price">15.99 USD<span>20.99 USD</span></div>
-                        <a href="" class="btn">Thêm vào giỏ</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="" class="fas fa-search"></a>
-                        <a href="" class="fas fa-heart"></a>
-                        <a href="" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" /images/book-3.png" alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>Sách nổi bật</h3>
-                        <div class="price">15.99 USD<span>20.99 USD</span></div>
-                        <a href="" class="btn">Thêm vào giỏ</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="" class="fas fa-search"></a>
-                        <a href="" class="fas fa-heart"></a>
-                        <a href="" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" /images/book-4.png" alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>Sách nổi bật</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <a href="" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="" class="fas fa-search"></a>
-                        <a href="" class="fas fa-heart"></a>
-                        <a href="" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" /images/book-5.png" alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>Sách nổi bật</h3>
-                        <div class="price">15.99 USD<span>20.99 USD</span></div>
-                        <a href="" class="btn">Thêm vào giỏ</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="" class="fas fa-search"></a>
-                        <a href="" class="fas fa-heart"></a>
-                        <a href="" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" /images/book-6.png" alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>Sách nổi bật</h3>
-                        <div class="price">15.99 USD<span>20.99 USD</span></div>
-                        <a href="" class="btn">Thêm vào giỏ</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="" class="fas fa-search"></a>
-                        <a href="" class="fas fa-heart"></a>
-                        <a href="" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" /images/book-7.png" alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>Sách nổi bật</h3>
-                        <div class="price">15.99 USD<span>20.99 USD</span></div>
-                        <a href="" class="btn">Thêm vào giỏ</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="" class="fas fa-search"></a>
-                        <a href="" class="fas fa-heart"></a>
-                        <a href="" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" /images/book-8.png" alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>Sách nổi bật</h3>
-                        <div class="price">15.99 USD<span>20.99 USD</span></div>
-                        <a href="" class="btn">Thêm vào giỏ</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="" class="fas fa-search"></a>
-                        <a href="" class="fas fa-heart"></a>
-                        <a href="" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" /images/book-9.png" alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>Sách nổi bật</h3>
-                        <div class="price">15.99 USD<span>20.99 USD</span></div>
-                        <a href="" class="btn">Thêm vào giỏ</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="" class="fas fa-search"></a>
-                        <a href="" class="fas fa-heart"></a>
-                        <a href="" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" /images/book-10.png" alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>Sách nổi bật</h3>
-                        <div class="price">15.99 USD<span>20.99 USd</span></div>
-                        <a href="" class="btn">Thêm vào giỏ</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="" class="fas fa-search"></a>
-                        <a href="" class="fas fa-heart"></a>
-                        <a href="" class="fas fa-eye"></a>
-                    </div>
-
-                    <div class="image">
-                        <img src=" /images/book-1.png" alt="">
-                    </div>
-
-                    <div class="content">
-                        <h3>Sách nổi bật</h3>
-                        <div class="price">15.99 USD<span>20.99 USD</span></div>
-                        <a href="" class="btn">Thêm vào giỏ</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
-    </section>
-
-   
-
-     <!-------- featured section ends  ----------->
-
-
-   
-
-
-      <!-------- arrivals section start  ----------->
-
-      <section class="arrivals" id="arrivals">
-
-            <div class="heading"><span>Sách mới</span></div>
-
-            <div class="swiper arrivals-slider">
-
-                <div class="swiper-wrapper">
-
-                    <a href="" class="swiper-slide box">
-                        <div class="image">
-                            <img src=" /images/book-1.png" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Sách mới</h3>
-                            <div class="price">15.99 USD<span>20.99 USD</span></div>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="" class="swiper-slide box">
-                        <div class="image">
-                            <img src=" /images/book-2.png" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Sách mới</h3>
-                            <div class="price">15.99 USD<span>20.99 USD</span></div>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="" class="swiper-slide box">
-                        <div class="image">
-                            <img src=" /images/book-3.png" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Sách mới</h3>
-                            <div class="price">15.99 USD<span>20.99 USD</span></div>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="" class="swiper-slide box">
-                        <div class="image">
-                            <img src=" /images/book-4.png" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Sách mới</h3>
-                            <div class="price">15.99 USD<span>20.99 USD</span></div>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="" class="swiper-slide box">
-                        <div class="image">
-                            <img src=" /images/book-5.png" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Sách mới</h3>
-                            <div class="price">15.99 USD<span>20.99 USD</span></div>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                </div>
-            </div>
-
-            <div class="swiper arrivals-slider">
-
-                <div class="swiper-wrapper">
-
-                    
-                    <a href="" class="swiper-slide box">
-                        <div class="image">
-                            <img src=" /images/book-6.png" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Sách mới</h3>
-                            <div class="price">15.99 USD<span>20.99 USD</span></div>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="" class="swiper-slide box">
-                        <div class="image">
-                            <img src=". /images/book-7.png" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Sách mới</h3>
-                            <div class="price">15.99 USD<span>20.99 USD</span></div>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="" class="swiper-slide box">
-                        <div class="image">
-                            <img src=" /images/book-8.png" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Sách mới</h3>
-                            <div class="price">15.99 USD<span>20.99 USD</span></div>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="" class="swiper-slide box">
-                        <div class="image">
-                            <img src=" /images/book-9.png" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Sách mới</h3>
-                            <div class="price">15.99 USD<span>20.99 USD</span></div>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="" class="swiper-slide box">
-                        <div class="image">
-                            <img src=" /images/book-10.png" alt="">
-                        </div>
-                        <div class="content">
-                            <h3>Sách mới</h3>
-                            <div class="price">15.99 USD<span>20.99 USD</span></div>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-      </section>
-
-
-       <!-------- arrivals section ends  ----------->
-
-        <!-------- deal section start  ----------->
-
-       
-
-
-      
-
-
-
-         
-
-          <!-------- footer section start  ----------->
-
-          <section class="footer">
-
-                <div class="box-container">
-
-                    <div class="box">
-                        <h3>Có mặt tại</h3>
-                        <a href=""><i class="fas fa-map-marker-alt"></i>VietNam</a>
-                        <a href=""><i class="fas fa-map-marker-alt"></i>Hoa Kỳ</a>
-                        <a href=""><i class="fas fa-map-marker-alt"></i>Liên Bang Nga</a>
-                        <a href=""><i class="fas fa-map-marker-alt"></i>Pháp</a>
-                        <a href=""><i class="fas fa-map-marker-alt"></i>Nhật Bản</a>
-                        <a href=""><i class="fas fa-map-marker-alt"></i>Các khu vực khác tại Đông Nam Á</a>
-                    </div>
-
-                    <div class="box">
-                        <h3>quick links</h3>
-                        <a href=""><i class="fas fa-arrow-right"></i>Trang chủ</a>
-                        <a href=""><i class="fas fa-arrow-right"></i>Scahs nổi bật</a>
-                        <a href=""><i class="fas fa-arrow-right"></i>Sách mới</a>
-                        <a href=""><i class="fas fa-arrow-right"></i>Blog</a>
-                      
-                    </div>
-
-                    <div class="box">
-                        <h3>extra links</h3>
-                        <a href=""><i class="fas fa-arrow-right"></i>Thông tin tài khoản</a>
-                        <a href=""><i class="fas fa-arrow-right"></i>Các sách đã đặt</a>
-                        <a href=""><i class="fas fa-arrow-right"></i>Chính sách bảo mật</a>
-                        <a href=""><i class="fas fa-arrow-right"></i>Thanh toán</a>
-                        <a href=""><i class="fas fa-arrow-right"></i>Dịch vụ của chúng tôi</a>
-                    </div>
-
-
-                    <div class="box">
-                        <h3>Thông tin liên hệ</h3>
-                        <a href=""><i class="fas fa-phone"></i>123456789</a>
-                        <a href=""><i class="fas fa-phone"></i>987654321</a>
-                        <a href=""><i class="fas fa-envelope"></i>qvkk@gmail.com</a>
-                        <img src=" /images/worldmap.png" alt="" class="map">
-                    </div>
-                </div>
-
-                <div class="share">
-                    <a href=""><i class="fas fa-facebook"></i></a>
-                    <a href=""><i class="fas fa-twitter"></i></a>
-                    <a href=""><i class="fas fa-instagram"></i></a>
-                    <a href=""><i class="fas fa-linkedin"></i></a>
-                    <a href=""><i class="fas fa-square-pinterest"></i></a>
-                </div>
-
-          </section>
-
-
-
-
-
-          <!-------- footer section ends  ----------->
-     <script type="module" src="/scripts/swiper/swiper-bundle.esm.browser.min.js"></script>
-     
-     <script type="module" src="/scripts/book.js"></script>
-    
-</body>
+    <script type="module" src="/scripts/book.js"></script>
+  </body>
 </html>

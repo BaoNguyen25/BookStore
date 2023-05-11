@@ -1,173 +1,33 @@
-/*------- search button ----------- */
+jQuery(
+  '<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>'
+).insertAfter(".quantity input");
+jQuery(".quantity").each(function () {
+  var spinner = jQuery(this),
+    input = spinner.find('input[type="number"]'),
+    btnUp = spinner.find(".quantity-up"),
+    btnDown = spinner.find(".quantity-down"),
+    min = input.attr("min"),
+    max = input.attr("max");
 
-searchform = document.querySelector('.search-form');
-
-document.querySelector('#search-btn').onclick = () =>{
-    searchform.classList.toggle('active');
-}
-
-
-
-
-window.onscroll = () =>{
-
-    searchform.classList.remove('active');
-
-    if(window.scrollY > 80){
-        document.querySelector('.header .header-2').classList.add('active');
-
-    }else{
-        document.querySelector('.header .header-2').classList.remove('active');
+  btnUp.click(function () {
+    var oldValue = parseFloat(input.val());
+    if (oldValue >= max) {
+      var newVal = oldValue;
+    } else {
+      var newVal = oldValue + 1;
     }
-}
+    spinner.find("input").val(newVal);
+    spinner.find("input").trigger("change");
+  });
 
-window.onload = () =>{
-
-    if(window.scrollY > 80){
-        document.querySelector('.header .header-2').classList.add('active');
-
-    }else{
-        document.querySelector('.header .header-2').classList.remove('active');
+  btnDown.click(function () {
+    var oldValue = parseFloat(input.val());
+    if (oldValue <= min) {
+      var newVal = oldValue;
+    } else {
+      var newVal = oldValue - 1;
     }
- 
-}
-
-
-/*----- login form -------- */
-
-var loginForm = document.querySelector('.login-form-container');
-
-document.querySelector('#login-btn').onclick = () =>{
-
-    loginForm.classList.toggle('active');
-}
-
-document.querySelector('#close-login-btn').onclick = () =>{
-
-    loginForm.classList.remove('active');
-}
-
-/*-------- swiper ---------- */
-
-var swiper = new Swiper(".books-list", {
-   
-    loop:true,
-    centeredSlides:true,
-    autoplay:{
-        delay:9500,
-        disableOnInteraction:false,
-    },
-    breakpoints: {
-     0: {
-        slidesPerView: 1,   
-      },
-      768: {
-        slidesPerView: 2, 
-      },
-      1024: {
-        slidesPerView: 3, 
-      },
-    },
+    spinner.find("input").val(newVal);
+    spinner.find("input").trigger("change");
   });
-
-/*-------- featured section start ---------- */
-
-var swiper = new Swiper(".featured-slider", {
-   
-    spaceBetween:10,
-    loop:true,
-    centeredSlides:true,
-    autoplay:{
-        delay:9500,
-        disableOnInteraction:false,
-    },
-    navigation:{
-        nextEl:".swiper-button-next",
-        prevEl:".swiper-button-prev",
-    },
-    breakpoints: {
-     0: {
-        slidesPerView: 1,   
-      },
-      450:{
-        slidesPerView: 2,   
-      },
-      768: {
-        slidesPerView: 3, 
-      },
-      1024: {
-        slidesPerView: 4, 
-      },
-    },
-  });
-
-
-  /*-------- arrivals section start ---------- */
-
-  var swiper = new Swiper(".arrivals-slider", {
-    spaceBetween: 10,
-    loop:true,
-    centeredSlides:true,
-    autoplay:{
-        delay:9500,
-        disableOnInteraction:false,
-    },
-    breakpoints: {
-     0: {
-        slidesPerView: 1,   
-      },
-      768: {
-        slidesPerView: 2, 
-      },
-      1024: {
-        slidesPerView: 3, 
-      },
-    },
-  });
-
-  
-  /*-------- reviews section start ---------- */
-
-  var swiper = new Swiper(".reviews-slider", {
-    spaceBetween: 10,
-    loop:true,
-    centeredSlides:true,
-    autoplay:{
-        delay:9500,
-        disableOnInteraction:false,
-    },
-    breakpoints: {
-     0: {
-        slidesPerView: 1,   
-      },
-      768: {
-        slidesPerView: 2, 
-      },
-      1024: {
-        slidesPerView: 3, 
-      },
-    },
-  });
-
-   /*-------- blog section start ---------- */
-
-   var swiper = new Swiper(".blog-slider", {
-    spaceBetween: 10,
-    loop:true,
-    centeredSlides:true,
-    autoplay:{
-        delay:9500,
-        disableOnInteraction:false,
-    },
-    breakpoints: {
-     0: {
-        slidesPerView: 1,   
-      },
-      768: {
-        slidesPerView: 2, 
-      },
-      1024: {
-        slidesPerView: 3, 
-      },
-    },
-  });
+});

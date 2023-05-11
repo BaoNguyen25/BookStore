@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 const passport = require('./config/config.passport');
 
 //apply middleware
-app.use(helmet());
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,7 +16,8 @@ app.use(express.static('public'));
 app.use(session({
     secret: 'secret',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 60},
 }));
 app.use(passport.initialize());
 app.use(passport.session());

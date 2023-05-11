@@ -1,40 +1,43 @@
 'use strict';
 
+const { getBooks } = require('../services/book.service');
+const { getCategories } = require('../services/category.service');
+const { getAuthors } = require('../services/author.service');
+
+
 class RenderController {
-    getSignIn = (req, res) => {
+    getSignIn = async (req, res) => {
         res.render('signIn');
     }
 
-    getForgetPassword = (req, res) => {
+    getForgetPassword = async (req, res) => {
         res.render('forgetPassword');
     }
 
-    getRecoverPassword = (req, res) => {
+    getRecoverPassword = async (req, res) => {
         const userId = req.params.id;
         res.render('recoverPassword', { userId });
     }
 
-    getDashboard = (req, res) => {
+    getDashboard = async (req, res) => {
         res.render('dashboard');
     }
 
-    getBook = (req, res) => {
-        res.render('book');
+    getBookPage = async (req, res) => {
+        const { name, category, author, input_range } = req.query;
+
+        let price = parseInt(input_range);
+        if (isNaN(price)) price = 1e9;
+
+        const bookList = await getBooks({ name, author, category}, price, 0);
+        const categoryList = await getCategories();
+        const authorList = await getAuthors();
+
+        res.render('book', { bookList, categoryList, authorList });
     }
 
-    getCart = (req, res) => {
+    getCartPage = (req, res) => {
         res.render('cart');
-    }
-
-
-
-
-    getBookPage = (req, res) => {
-        res.render('book');
-    }
-
-    getDashboard = (req, res) => {
-        res.render('dashboard');
     }
 }
 
