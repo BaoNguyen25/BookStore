@@ -52,6 +52,10 @@ class RenderController {
     getCartPage = (req, res) => {
         res.render('cart');
     }
+
+    getProfilePage = (req, res) => {
+        res.render('profile');
+    }
 }
 
 module.exports = new RenderController();
