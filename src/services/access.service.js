@@ -8,6 +8,22 @@ const sendMail = require('../utils/sendMail');
 const { app } = require('../config/config.app');
 
 class AccessService {
+    static signUpUser = async (email, password, name, gender, address, phone) => {
+        const info = {
+            email: email,
+            name: name,
+            gender: gender,
+            address: address,
+            phone: phone,
+            identity: 'user',
+            role: 'User'
+        }
+
+        return await User.register(info, password).catch(err => {
+            console.error(err);
+            return null;
+        });
+    }
     static signIn = async (req, res, next) => {
         const { email, password } = req.body;
         return new Promise(async (resolve, reject) => {

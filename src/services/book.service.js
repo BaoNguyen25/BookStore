@@ -37,6 +37,30 @@ class BookService {
             return null;
         });
     }
+    
+    static getBooksMaxLength = async (input={}, price=1e9) => {
+        const query = [];
+
+        for (const key in input) {
+            if (input[key]) {
+                query.push({ [key]: { $regex: input[key], $options: 'i' } });
+            }
+        }
+    
+        return await Book.aggregate([
+            {
+              $match: {
+                $and: [
+                    query.length ? { $and: query } : {},
+                    { price: { $lte: price } },
+                ],
+              },
+            },
+        ]).catch((error) => {
+            console.log(error);
+            return null;
+        });
+    }
 }
 
 module.exports = BookService;

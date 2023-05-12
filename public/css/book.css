@@ -996,3 +996,9 @@ option {
 .content h4 {
   margin-bottom: 30px;
 }
+.pagination-link {
+  font-size: 20px;
+  color: #009d63;
+  text-decoration: none;
+  padding: 10px;
+}

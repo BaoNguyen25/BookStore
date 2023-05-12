@@ -1,8 +1,24 @@
 'use strict';
 
-const { signIn, sendRecoveryEmail, recoverPassword } = require('../services/access.service');
+const { signIn, sendRecoveryEmail, recoverPassword, signUpUser } = require('../services/access.service');
 
 class AccessController {
+    signUp = async (req, res, next) => {
+        const {email, password, name, gender, address, phone} = req.body;
+
+        if (!email || !password || !name || !gender || !address || !phone) {
+            return res.status(400).json({
+                message: "Please fill in all field to sign up"
+            })
+        }
+
+        const user = await signUpUser(email, password, name, gender, address, phone);
+
+        return user ? res.status(200).json({
+            message: 'Sign up successfully',
+        }) : res.status(400).json({message: 'Email already exists'});
+    }
+
     signIn = async (req, res, next) => {
         const { email, password } = req.body;
 
@@ -26,7 +42,7 @@ class AccessController {
                 email: req.user.email,
                 role: req.user.role,
             },
-        }) : res.status(400).json({'message': 'Invalid email or password'});
+        }) : res.status(400).json({message: 'Invalid email or password'});
     }
 
     signOut = async (req, res, next) => {

@@ -18,18 +18,18 @@
 </head>
 <body>
     <div class="container d-flex flex-row align-content-center">
-        <div class="container-child d-flex flex-row ">
+        <div class="container-child d-flex flex-row" style="overflow: auto;">
             <div class="logo d-flex justify-content-center align-content-center">
                 <img src="/images/logo.png" alt="" class="img-logo align-self-center">
             </div>
             <div class="content d-flex flex-column align-content-center">
-                <h2 class="text align-self-center">Đăng nhập</h2>
+                <h2 class="text align-self-center">Đăng ký</h2>
                 
                 <div class="form align-self-center">
                     <div class="form-group">
                         <img src="/images/identity.png" class="image">
                         <input type="text" id="email" name="email" class="input-field" placeholder="">
-                        <label for="username" class="label">Tài khoản</label>
+                        <label for="email" class="label">Tài khoản</label>
                         <div class="checkName"></div>
                     </div>
                     <div class="form-group">
@@ -39,26 +39,36 @@
                         <i class="far fa-eye" id="togglePassword"></i>
                         <div class="checkPass"></div>
                     </div>
-                    <div class="d-flex flex-row justify-content-between">
-                        <div>
-                            <a href="/access/forget-password" class="forgotPass">Quên mật khẩu?</a>
-                        </div>
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" class="input-field" placeholder="">
+                        <label for="email" class="label">Họ tên</label>
                     </div>
-                    <div class="d-flex flex-row justify-content-between">
-                        <div>
-                            <a href="/access/signup" class="forgotPass">Đăng ký</a>
-                        </div>
+                    <div class="form-group">
+                        <select class="input-field" id="gender" name="gender"> 
+                            <option value="Male">Nam</option>
+                            <option value="Female">Nữ</option>
+                            <option value="Other">Khác</option>
+                        </select>
+                        <label for="address" class="label">Giới tính</label>
                     </div>
-
+                    <div class="form-group">
+                        <input type="text" id="address" name="address" class="input-field" placeholder="">
+                        <label for="address" class="label">Địa chỉ</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="phone" name="phone" class="input-field" placeholder="">
+                        <label for="phone" class="label">Số điện thoại</label>
+                    </div>
+                    
                     <div class="d-flex flex-row justify-content-center">
-                        <button class="submit align-self-center mt-4" id="signInBtn">Đăng nhập</button>
+                        <button class="submit align-self-center mt-4" id="SignUpBtn">Đăng ký</button>
                     </div>
                 </div>
                 
             </div>
         </div>
     </div>
-    <script src="/scripts/signIn.js"></script>
+    <script src="/scripts/SignUp.js"></script>
 </body>
 
 </html>

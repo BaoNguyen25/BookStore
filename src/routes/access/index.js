@@ -1,8 +1,13 @@
 "use strict";
 
 const router = require('express').Router();
-const { signIn, signOut, sendRecoveryEmail, recoverPassword } = require('../../controllers/access.controller');
-const { getSignIn, getForgetPassword, getRecoverPassword } = require('../../controllers/render.controller');
+const { signIn, signOut, sendRecoveryEmail, recoverPassword, signUp } = require('../../controllers/access.controller');
+const { getSignIn, getForgetPassword, 
+    getRecoverPassword, getSignUp } = require('../../controllers/render.controller');
+
+router.get('/signup', getSignUp);
+
+router.post('/signup', signUp);
 
 router.get('/signin', getSignIn);
 
