@@ -2,8 +2,12 @@
 
 const router = require('express').Router();
 
-const { getCartPage } = require('../../controllers/render.controller');
+const { addToCart, deleteFromCart, submitOrder } = require('../../controllers/order.controller');
 
-router.get('/cart', getCartPage);
+router.post('/add', addToCart);
+
+router.post('/delete', deleteFromCart);
+
+router.post('/submit', submitOrder);
 
 module.exports = router;

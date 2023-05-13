@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="img-src 'self' https://firebasestorage.googleapis.com"
+    />
+
     <title>Cửa hàng bán sách</title>
     <link rel="stylesheet" href="/css/cart.css" />
     <link
@@ -14,64 +19,38 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
     />
-    <link rel="stylesheet" href="/css/book.css">
+    <link rel="stylesheet" href="/css/book.css" />
   </head>
-  <body style="background-color: #f3f3f3;">
-    
+  <body style="background-color: #f3f3f3">
     <%- include('partials/header') %>
 
     <div class="wrapper">
       <h1>Giỏ hàng</h1>
       <div class="project">
         <div class="shop">
-          <div class="box">
-            <img src="images/book-1.png" />
+          <% for (let i = 0; i < cart.length; i++) { %>
+          <div class="box" id="detail-<%= i %>">
+            <img src="<%= cart[i].book.image.replaceAll(' ', '') %>" />
             <div class="content">
-              <h3>Đắc Nhân Tâm</h3>
-              <h4>Giá: 9.99 USD</h4>
-              <p class="unit">Số lượng mua: <input name="" value="2" /></p>
-              <p class="btn-area">
-                <i aria-hidden="true" class="fa fa-trash"></i>
-                <span class="btn2">Hủy</span>
-              </p>
-            </div>
-          </div>
-          <div class="box">
-            <img src="images/book-1.png" />
-            <div class="content">
-              <h3>Nhà Giả Kim</h3>
-              <h4>Giá: 9.99 USD</h4>
-              <p class="unit">Số lượng mua: <input name="" value="1" /></p>
+              <h3><%= cart[i].book.name %></h3>
+              <h4>Giá: <span id="price-<%= i %>">  <%= cart[i].book.price %> </span></h4>
+              <p class="unit">Số lượng mua:</p>
               <div class="quantity">
-                <input type="number" min="1" step="1" value="1">
+                <input id="quantity-<%= i %>" type="number" min="1" value="1" />
               </div>
-              <p class="btn-area">
-                <i aria-hidden="true" class="fa fa-trash"></i>
-                <span class="btn2">Hủy</span>
-              </p>
+              <button id="delete-btn-<%= i %>" value="<%= cart[i].book._id %>" class="btn-area"><i aria-hidden="true" class="fa fa-trash"></i>
+                <span class="btn2">Hủy</span></button>
             </div>
           </div>
-          <div class="box">
-            <img src="images/book-1.png" />
-            <div class="content">
-              <h3>Cách nghĩ để thành công</h3>
-              <h4>Giá: 19.99 USD</h4>
-              <p class="unit">Quantity: <input name="" value="0" /></p>
-              <p class="btn-area">
-                <i aria-hidden="true" class="fa fa-trash"></i>
-                <span class="btn2">Hủy</span>
-              </p>
-            </div>
-          </div>
+          <% } %>
         </div>
         <div class="right-bar">
-          <p><span>Tổng </span> <span>171 USD</span></p>
-          <a href="#"><i class="fa fa-shopping-cart"></i>Đặt hàng</a>
+          <p><span>Tổng </span> <span id="total-price"></span></p>
+          <button id="submit-btn" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Đặt hàng</button>
         </div>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="/scripts/cart.js"></script>
   </body>
 </html>

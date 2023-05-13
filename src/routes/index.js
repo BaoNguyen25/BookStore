@@ -12,6 +12,7 @@ router.use('/access', require('./access/index'));
 
 router.use('/order', checkAuthen, require('./order/index'));
 
-router.use('/profile', checkAuthen, require('./profile/index'));
+router.use('/user', checkAuthen, require('./user/index'));
+
 module.exports = router;
 
