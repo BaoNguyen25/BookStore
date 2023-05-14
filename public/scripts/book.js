@@ -1,13 +1,18 @@
 const input_range = document.getElementById('input_range');
 const input_value = document.getElementById('input_value');
 const add_btn = document.querySelectorAll('[id^="add-btn"]');
+const curPage = document.getElementById('pagination').getAttribute('curpage');
+const curPageButton = document.getElementById(`page-${curPage}`);
+
+if (curPageButton) {
+    curPageButton.style.backgroundColor = '#009d63';
+    curPageButton.style.color = '#FFFFFF';
+}
 
 input_range.addEventListener('input', (e) => {
     console.log(e.target.value);
     input_value.innerHTML = e.target.value;
 });
-
-console.log(add_btn)
 
 add_btn.forEach(async btn => btn.addEventListener('click', async (event) => {
     event.preventDefault();

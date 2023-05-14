@@ -64,6 +64,11 @@ submit_btn.addEventListener('click', async (event) => {
     bookQuantity[bookId] = quantity;
   });
 
+  if (Object.keys(bookQuantity).length === 0) {
+    alert('No book in cart');
+    return;
+  }
+
   const data = await fetch('/order/submit', {
     method: 'POST',
     headers: {

@@ -103,15 +103,19 @@
       </div>
     </div>
 
-    <div style="display: flex; justify-content: center;">
+    <div style="display: flex; justify-content: center" curpage="<%= pagination.curPage %>" id="pagination">
       <% for (let i = 1; i < pagination.maxPage; i++) { %>
-        <a href="<%= pagination.queryString + '&page=' + (i - 1) %>" class="pagination-link">
-          <%= i %> 
-        </a>
+      <a
+        href="<%= pagination.queryString + '&page=' + (i - 1) %>"
+        class="pagination-link"
+        id="page-<%= i - 1 %>"
+      >
+        <%= i %>
+      </a>
       <% } %>
     </div>
     <%- include('partials/footer.ejs') %>
 
-    <script type="module" src="/scripts/book.js"></script>
+    <script type="module" type="text/javascript" src="/scripts/book.js"></script>
   </body>
 </html>

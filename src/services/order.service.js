@@ -34,6 +34,10 @@ class OrderService {
             const details = await OrderDetail.find({ user: userId }).populate('book').lean(); 
             let total = 0;
 
+            if (details.length === 0) {
+                throw new Error('Cart is empty');
+            }
+
             details.forEach(async (detail) => {
                 const book = detail.book;
                 console.log(bookQuantity[book._id])

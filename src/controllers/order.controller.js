@@ -41,7 +41,8 @@ class OrderController {
             return submitted ? res.status(200).json({ message: 'Submit order successfully' }) :
             res.status(400).json({ message: 'Submit order failed' });
         } catch (error) {
-            
+            console.log(error);
+            res.status(400).json({ message: error.message });
         }
     };
 }
