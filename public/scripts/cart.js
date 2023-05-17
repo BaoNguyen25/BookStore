@@ -1,8 +1,34 @@
 const delete_btn = document.querySelectorAll('[id^="delete-btn"]');
 const input = document.querySelectorAll('[id^="quantity-"]');
-const detail = document.querySelectorAll('[id^="detail-"]');
+let detail = document.querySelectorAll('[id^="detail-"]');
 const total_price = document.getElementById('total-price');
 const submit_btn = document.getElementById('submit-btn');
+
+function notification(status, msg) {
+  let alert = document.getElementById("Alert");
+  alert.innerHTML = msg;
+  alert.style.color = "white";
+
+  alert.style.position = "fixed";
+  alert.style.top = "30px";
+  alert.style.right = "0px";
+
+  if (status === "success") {
+      alert.style.backgroundColor = "green";
+  }
+  else if (status === "processing") {
+      alert.style.backgroundColor = "blue";
+      alert.innerHTML = "Đang xử lý...";
+  } else if (status === "error") {
+      alert.style.backgroundColor = "red";
+  }
+
+  alert.classList.add("showAlert");
+
+  setTimeout(() => {
+      alert.classList.remove("showAlert");
+  }, 1000);
+}
 
 const updateTotalPrice = () => {
   let total = 0;
@@ -38,17 +64,17 @@ delete_btn.forEach((btn) => {
     }).then((res) => res.json())
     .then(async (data) => {
       if (data.message === 'Delete from cart successfully') {
-        alert('Delete from cart successfully');
-        //delete div 
+        
         const order = btn.id.split('-')[2];
         const div = document.getElementById(`detail-${order}`);
         div.remove();
 
         updateTotalPrice();
-        return;
+        detail = document.querySelectorAll('[id^="detail-"]');
+        return notification('success', 'Xóa sản phẩm ra khỏi giỏ hàng thành công');
       }
 
-      alert('Delete from cart failed');
+      notification('error', 'Xóa sản phẩm ra khỏi giỏ hàng thất bại')
     });
   });
 });
@@ -59,14 +85,14 @@ submit_btn.addEventListener('click', async (event) => {
 
   detail.forEach((div) => {
     const Id = div.id.split('-')[1];
-    const bookId = document.getElementById(`delete-btn-${Id}`).value;
+
+    const bookId = document.getElementById(`delete-btn-${Id}`).getAttribute('value');
     const quantity = document.getElementById(`quantity-${Id}`).value;
     bookQuantity[bookId] = quantity;
   });
 
   if (Object.keys(bookQuantity).length === 0) {
-    alert('No book in cart');
-    return;
+    return notification('error', 'Giỏ hàng trống');
   }
 
   const data = await fetch('/order/submit', {
@@ -78,12 +104,12 @@ submit_btn.addEventListener('click', async (event) => {
   }).then((res) => res.json())
   .then(async (data) => {
     if (data.message === 'Submit order successfully') {
-      alert('Submit order successfully');
+      notification('success', 'Đặt hàng thành công');
       window.location.href = '/user/cart';
       return;
     }
 
-    alert('Submit order failed');
+    notification('error', 'Đặt hàng thất bại');
   });
 });
 

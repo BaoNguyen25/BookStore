@@ -9,6 +9,32 @@ if (curPageButton) {
     curPageButton.style.color = '#FFFFFF';
 }
 
+function notification(status, msg) {
+    let alert = document.getElementById("Alert");
+    alert.innerHTML = msg;
+    alert.style.color = "white";
+
+    alert.style.position = "fixed";
+    alert.style.top = "30px";
+    alert.style.right = "0px";
+
+    if (status === "success") {
+        alert.style.backgroundColor = "green";
+    }
+    else if (status === "processing") {
+        alert.style.backgroundColor = "blue";
+        alert.innerHTML = "Đang xử lý...";
+    } else if (status === "error") {
+        alert.style.backgroundColor = "red";
+    }
+
+    alert.classList.add("showAlert");
+
+    setTimeout(() => {
+        alert.classList.remove("showAlert");
+    }, 1000);
+}
+
 input_range.addEventListener('input', (e) => {
     console.log(e.target.value);
     input_value.innerHTML = e.target.value;
@@ -18,8 +44,10 @@ add_btn.forEach(async btn => btn.addEventListener('click', async (event) => {
     event.preventDefault();
     let bookId = btn.value;
 
+    notification('processing', 'Đang xử lý...');
+
     if (!bookId) {
-        return alert('Hãy đăng nhập trước khi thêm vào giỏ hàng!');
+        return notification('error', 'Thêm vào giỏ hàng thất bại');
     }
 
     const data = await fetch('/order/add', {
@@ -32,12 +60,12 @@ add_btn.forEach(async btn => btn.addEventListener('click', async (event) => {
     .then(res => res.json())
     .then(data => {
         if (data.message === 'Add to cart successfully') {
-            return alert('Add to cart successfully')
+            return notification('success', 'Thêm vào giỏ hàng thành công');
         }
 
-        alert('Add to cart failed');
+        notification('error', 'Hãy đăng nhập để thêm vào giỏ hàng, hoặc sản phẩm đã có trong giỏ hàng!');
     }).catch(error => {
         console.log(error);
-        alert(error.message);
+        notification('error', 'Hãy đăng nhập để thêm vào giỏ hàng, hoặc sản phẩm đã có trong giỏ hàng!');
     });
 }));
